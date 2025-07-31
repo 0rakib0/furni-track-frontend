@@ -26,7 +26,9 @@ export default function RootLayout({ children }) {
       >
         <div className="bg-[#f3f4f6]">
           <NavBar></NavBar>
-          {children}
+          <div className="md:px-12 px-6">
+            {children}
+          </div>
           <Footer></Footer>
         </div>
       </body>
