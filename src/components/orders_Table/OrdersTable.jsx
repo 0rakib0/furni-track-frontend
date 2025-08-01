@@ -2,8 +2,8 @@ import React from 'react'
 
 function OrdersTable({title}) {
     return (
-        <div>
-            <h3 className='text-2xl mb-2'>{title}</h3>
+        <div className='my-6'>
+            <h3 className='text-2xl mb-2 text-[#57c7d4]'>{title}</h3>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 shadow-lg">
                 <table className="table">
                     {/* head */}

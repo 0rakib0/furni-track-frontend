@@ -6,7 +6,7 @@ function NavBar() {
 
   const navItems = [
     { id: '1', name: 'Home', path: '/' },
-    { id: '2', name: 'Manage Orders', path: '/manage-orders' },
+    { id: '2', name: 'Manage Orders', path: '/order-management' },
     { id: '3', name: 'Manage Dealer', path: '/manage-dealer' },
     { id: '4', name: 'Manage Employee', path: '/manage-employee' },
     { id: '5', name: 'About', path: '/about-furnitack' },
