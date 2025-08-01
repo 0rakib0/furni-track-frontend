@@ -17,7 +17,7 @@ function OrderManagement() {
     <div>
       <PageTitle></PageTitle>
       {/* all routs about  orders*/}
-      <div className='grid grid-cols-4 gap-6'>
+      <div className='grid md:grid-cols-4 grid-cols-2 md:gap-6 gap-2'>
         {
           orderRout.map(rout =><RoutCard key={rout.id} name={rout.name} path={rout.path}></RoutCard>)
         }
