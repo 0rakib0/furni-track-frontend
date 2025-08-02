@@ -11,6 +11,10 @@ function OrderManagement() {
     {name:'📄 View Orders', path:'/', id:'2'},
     {name:'📈 Orders Report', path:'/', id:'3'},
     {name:'📆 Delivery Calendar', path:'/', id:'4'},
+    {name:'🔍 Filter Orders', path:'/', id:'5'},
+    {name:'📦 Shaduled Delivery', path:'/', id:'6'},
+    {name:'📄 All Order Sheet', path:'/', id:'7'},
+    {name:'🔔 Delivered Orders', path:'/', id:'8'},
   ]
 
   return (
