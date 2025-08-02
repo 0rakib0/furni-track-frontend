@@ -1,3 +1,4 @@
+import EmployeeTable from '@/components/EmployeeTable/EmployeeTable'
 import OrdersTable from '@/components/orders_Table/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
@@ -24,7 +25,7 @@ function EmployeManagement() {
 
         {/* Pending Orders */}
 
-        <OrdersTable title="🧾All Dealers"></OrdersTable>
+        <EmployeeTable title="🧾All Employee"></EmployeeTable>
     </div>
     )
 }
