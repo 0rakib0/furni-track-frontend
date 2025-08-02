@@ -7,7 +7,7 @@ import React from 'react'
 function EmployeManagement() {
 
     const employeeRout = [
-        { name: '📝 Add Employee', path: '/add-dealer', id: '1' },
+        { name: '📝 Add Employee', path: '/add-employee', id: '1' },
         { name: '📄 View Employee', path: '/view-dealer', id: '2' },
         { name: '📈 Expenses Employee', path: '/', id: '3' },
         { name: '📆 Employee Expenses History', path: '/', id: '4' },
