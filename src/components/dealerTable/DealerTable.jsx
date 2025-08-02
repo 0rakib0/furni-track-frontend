@@ -5,7 +5,7 @@ function DealerTable() {
   return (
     <div>
         <div className='my-6'>
-            <h3 className='md:text-2xl text-xl mb-2 text-[#57c7d4]'>🧾 Dealer List</h3>
+            <h3 className='md:text-2xl text-xl mb-2 text-[#57c7d4]'>🧾Dealer List</h3>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 shadow-lg">
                 <table className="table">
                     {/* head */}
