@@ -2,11 +2,18 @@ import DealerTable from '@/components/dealerTable/DealerTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 
-function ViewDealer() {
+async function ViewDealer() {
+
+  const data = await fetch('http://127.0.0.1:8000/dealers/')
+  const dealers = await data.json()
+
+  
+
   return (
     <div>
         <PageTitle></PageTitle>
-        <DealerTable></DealerTable>
+        <DealerTable dealers={dealers}></DealerTable>
+        
     </div>
   )
 }
