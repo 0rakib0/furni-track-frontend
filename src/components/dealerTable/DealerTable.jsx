@@ -1,7 +1,19 @@
+"use client"
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import { FaRegEye, FaPencilAlt } from "react-icons/fa";
+import { ImBin } from "react-icons/im";
+import SingleDealerView from '../SingleDealerView/SingleDealerView';
 
 function DealerTable({ dealers }) {
+
+    const [selectDealer, setSelectSealer] = useState(null)
+
+    const handleView = (dealerData) =>{
+        setSelectSealer(dealerData)
+        document.getElementById("my_modal_5").showModal();
+    }
+
 
     return (
         <div>
@@ -31,8 +43,14 @@ function DealerTable({ dealers }) {
                                         <td>{deale.phone}</td>
                                         <td>{deale.address}</td>
                                         <td>
-                                            <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                            <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
+                                            <button onClick={() =>{handleView(deale)}} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            </button>
+                                            <span className="badge badge-soft badge-primary mr-2"><Link href="">
+                                                <span> <FaPencilAlt></FaPencilAlt> </span>
+                                            </Link></span>
+                                            <span className="badge badge-soft text-red-400"><Link href="">
+                                                <span><ImBin></ImBin></span>
+                                            </Link></span>
                                         </td>
                                     </tr>
                                 })
@@ -41,6 +59,7 @@ function DealerTable({ dealers }) {
                     </table>
                 </div>
             </div>
+            <SingleDealerView dealer = {selectDealer}></SingleDealerView>
         </div>
     )
 }
