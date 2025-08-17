@@ -9,11 +9,29 @@ function DealerTable({ dealers }) {
 
     const [selectDealer, setSelectSealer] = useState(null)
 
-    const handleView = (dealerData) =>{
+    const handleView = (dealerData) => {
         setSelectSealer(dealerData)
         document.getElementById("my_modal_5").showModal();
     }
 
+    const handleDleteDelar = (id) => {
+        console.log(id)
+        fetch(`http://127.0.0.1:8000/dealers/${id}`, {
+            method: 'DELETE',
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                toast.success("Dealer Data Successfully added");
+                setLoading(false)
+                form.reset();
+            })
+
+            .catch(error => {
+                toast.error(error);
+                setLoading(false)
+            })
+    }
 
     return (
         <div>
@@ -43,14 +61,15 @@ function DealerTable({ dealers }) {
                                         <td>{deale.phone}</td>
                                         <td>{deale.address}</td>
                                         <td>
-                                            <button onClick={() =>{handleView(deale)}} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            <button onClick={() => { handleView(deale) }} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
-                                            <span className="badge badge-soft badge-primary mr-2"><Link href="">
-                                                <span> <FaPencilAlt></FaPencilAlt> </span>
-                                            </Link></span>
-                                            <span className="badge badge-soft text-red-400"><Link href="">
+
+                                            <span className="badge badge-soft text-red-400 mr-2"><Link href="">
                                                 <span><ImBin></ImBin></span>
                                             </Link></span>
+
+                                            <button onClick={() => { handleDleteDelar(deale.id) }} className="badge badge-soft badge-primary mr-2">
+                                                <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                         </td>
                                     </tr>
                                 })
@@ -59,7 +78,7 @@ function DealerTable({ dealers }) {
                     </table>
                 </div>
             </div>
-            <SingleDealerView dealer = {selectDealer}></SingleDealerView>
+            <SingleDealerView dealer={selectDealer}></SingleDealerView>
         </div>
     )
 }
