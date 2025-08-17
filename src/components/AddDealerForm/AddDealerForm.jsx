@@ -1,12 +1,22 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 function AddDealerForm() {
 
-
+    const [loading, setLoading] = useState(false)
 
     const handleFormSubMit = event => {
         event.preventDefault()
+        setLoading(true)
+
+        // setTimeout(() => {
+        //     // alert("Hello world")
+        //     setLoading(false)
+
+        // }, "3000")
+
+        
+
         const form = event.target;
         const dealer_name = form.name.value;
         const dealer_age = form.age.value;
@@ -20,7 +30,7 @@ function AddDealerForm() {
         dealerFormData.append('phone', phone);
         dealerFormData.append('address', address);
         dealerFormData.append('dealer_image', image);
-        
+
 
         fetch('http://127.0.0.1:8000/dealers/', {
             method: 'POST', 
@@ -29,18 +39,22 @@ function AddDealerForm() {
 
         .then(res => res.json())
         .then(data =>{
-            console.log(data)
            toast.success("Dealer Data Successfully added");
+           setLoading(false)
+           form.reset();
         })
 
         .catch(error =>{
-            console.log(error)
+            toast.error(error);
+            setLoading(false)
         })
 
 
 
 
     }
+
+   
 
     return (
         <div>
@@ -68,7 +82,9 @@ function AddDealerForm() {
                         <input type="file" name='dealer_pic' className="file-input w-full" />
                     </fieldset>
 
-                    <button type='submit' className='w-full py-3 rounded-md text-white hover:bg-white hover:border hover:text-[#57c7d4] bg-[#57c7d4] transition duration-300 ease-in-out my-4'>Add Dealer</button>
+                    <button type='submit' className='w-full py-3 rounded-md text-white hover:bg-white hover:border hover:text-[#57c7d4] bg-[#57c7d4] transition duration-300 ease-in-out my-4'>
+                        {loading ? <span className="loading loading-bars loading-lg"></span> : 'Add Dealer'} 
+                    </button>
                 </div>
             </form>
         </div>
