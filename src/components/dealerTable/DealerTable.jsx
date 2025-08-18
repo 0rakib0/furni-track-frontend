@@ -16,21 +16,19 @@ function DealerTable({ dealers }) {
 
     const handleDleteDelar = (id) => {
         console.log(id)
-        fetch(`http://127.0.0.1:8000/dealers/${id}`, {
+        fetch(`http://127.0.0.1:8000/dealers/${id}/`, {
             method: 'DELETE',
         })
 
-            .then(res => res.json())
-            .then(data => {
-                toast.success("Dealer Data Successfully added");
-                setLoading(false)
-                form.reset();
-            })
+        // .then(res => res)
+        // .then(() =>{
+        //      toast.success("Dealer deleted successfully")
+        // })
 
-            .catch(error => {
-                toast.error(error);
-                setLoading(false)
-            })
+        // .catch(error => {
+        //     toast.error(error.message);
+        //     setLoading(false)
+        // })
     }
 
     return (
@@ -64,11 +62,11 @@ function DealerTable({ dealers }) {
                                             <button onClick={() => { handleView(deale) }} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
 
-                                            <span className="badge badge-soft text-red-400 mr-2"><Link href="">
+                                            <button onClick={() => { handleDleteDelar(deale.id) }} className="badge badge-soft text-red-400 mr-2">
                                                 <span><ImBin></ImBin></span>
-                                            </Link></span>
+                                            </button>
 
-                                            <button onClick={() => { handleDleteDelar(deale.id) }} className="badge badge-soft badge-primary mr-2">
+                                            <button className="badge badge-soft badge-primary mr-2">
                                                 <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                         </td>
                                     </tr>
