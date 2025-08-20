@@ -10,6 +10,7 @@ function DealerTable({ dealers }) {
 
     const [selectDealer, setSelectDealer] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [delers, setDelaers] = useState(dealers)
 
     const handleView = (dealerData) => {
         setSelectDealer(dealerData)
@@ -34,6 +35,8 @@ function DealerTable({ dealers }) {
             .then(res => res)
             .then(() => {
                 toast.success("Dealer deleted successfully")
+                const afterDeleteDealer = delers.filter(dealer => dealer.id !== selectDealer.id)
+                setDelaers(afterDeleteDealer)
             })
 
             .catch(error => {
@@ -73,7 +76,7 @@ function DealerTable({ dealers }) {
                         <tbody>
                             {/* row 1 */}
                             {
-                                dealers.map(deale => {
+                                delers.map(deale => {
                                     return <tr key={deale.id}>
                                         <th>1</th>
                                         <td>{deale.id}</td>
