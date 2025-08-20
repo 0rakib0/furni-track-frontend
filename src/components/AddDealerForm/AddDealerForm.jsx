@@ -8,13 +8,6 @@ function AddDealerForm() {
     const handleFormSubMit = event => {
         event.preventDefault()
         setLoading(true)
-
-        // setTimeout(() => {
-        //     // alert("Hello world")
-        //     setLoading(false)
-
-        // }, "3000")
-
         
 
         const form = event.target;

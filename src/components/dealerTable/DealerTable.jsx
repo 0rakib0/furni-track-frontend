@@ -5,6 +5,7 @@ import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
 import SingleDealerView from '../SingleDealerView/SingleDealerView';
 import DeleteAlart from '../deleteConfirmationAlert/DeleteAlart';
+import UpdateDealer from '../UpdateDealer/UpdateDealer';
 
 function DealerTable({ dealers }) {
 
@@ -15,6 +16,11 @@ function DealerTable({ dealers }) {
     const handleView = (dealerData) => {
         setSelectDealer(dealerData)
         document.getElementById("my_modal_5").showModal();
+    }
+
+    const handleUpdateDealer = (dealer) =>{
+        setSelectDealer(dealer)
+        document.getElementById("update_dealer").showModal();
     }
 
     const handleDeleteClick = (dealer) => {
@@ -92,7 +98,7 @@ function DealerTable({ dealers }) {
                                             </button>
                                             <DeleteAlart id={deale.id} status='dealer'></DeleteAlart>
 
-                                            <button className="badge badge-soft badge-primary mr-2">
+                                            <button onClick={() => handleUpdateDealer(deale)} className="badge badge-soft badge-primary mr-2">
                                                 <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                         </td>
                                     </tr>
@@ -102,12 +108,16 @@ function DealerTable({ dealers }) {
                     </table>
                 </div>
             </div>
+            {/* view single dealer details */}
             <SingleDealerView dealer={selectDealer}></SingleDealerView>
+            {/* dealer delete alart */}
             <DeleteAlart
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={handleConfirmDelete}
             />
+            {/* update Dealer */}
+            <UpdateDealer dealer = {selectDealer}></UpdateDealer>
         </div>
     )
 }
