@@ -1,4 +1,4 @@
-import DealerTable from '@/components/dealerTable/DealerTable'
+import DealerTable from '@/components/dealerComponents/dealerTable/DealerTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 

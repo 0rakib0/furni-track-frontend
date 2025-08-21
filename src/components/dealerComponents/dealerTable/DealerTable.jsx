@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
 import SingleDealerView from '../SingleDealerView/SingleDealerView';
-import DeleteAlart from '../deleteConfirmationAlert/DeleteAlart';
 import UpdateDealer from '../UpdateDealer/UpdateDealer';
+import DeleteAlart from '@/components/deleteConfirmationAlert/DeleteAlart';
 
 function DealerTable({ dealers }) {
 

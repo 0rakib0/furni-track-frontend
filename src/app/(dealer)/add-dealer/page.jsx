@@ -1,4 +1,4 @@
-import AddDealerForm from '@/components/AddDealerForm/AddDealerForm'
+import AddDealerForm from '@/components/dealerComponents/AddDealerForm/AddDealerForm'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 

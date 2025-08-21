@@ -35,6 +35,8 @@ function UpdateDealer({ dealer }) {
                 toast.success("Dealer Data Successfully Updated");
                 setLoading(false)
                 form.reset();
+                document.getElementById('update_dealer').close();
+
             })
 
             .catch(error => {
