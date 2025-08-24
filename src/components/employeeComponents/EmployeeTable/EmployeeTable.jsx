@@ -5,6 +5,7 @@ import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
 import ViewSingleEmployee from './ViewSingleEmployee';
 import DeleteAlart from '@/components/deleteConfirmationAlert/DeleteAlart';
+import UpdateEmployee from '../UpdateEmployee';
 
 function EmployeeTable({ employees }) {
 
@@ -12,9 +13,14 @@ function EmployeeTable({ employees }) {
     const [selectEmployee, setEmployee] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const handleViewDealer = (employee) => {
+    const handleViewEmployee = (employee) => {
         setEmployee(employee)
         document.getElementById("EmployeeViewModal").showModal();
+    }
+
+    const handleuUpdateEmployee = (employee) =>{
+        setEmployee(employee)
+        document.getElementById('UpdateEmployeeModal').showModal();
     }
 
 
@@ -91,14 +97,14 @@ function EmployeeTable({ employees }) {
                                                     ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{employee.performance_status}</span>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleViewDealer(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                        <button onClick={() => handleViewEmployee(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                         </button>
 
                                         <button onClick={() => handleDeleteClick(employee)} className="badge badge-soft text-red-400 mr-2">
                                             <span><ImBin></ImBin></span>
                                         </button>
 
-                                        <button className="badge badge-soft badge-primary mr-2">
+                                        <button onClick={()=>handleuUpdateEmployee(employee)} className="badge badge-soft badge-primary mr-2">
                                             <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                     </td>
                                 </tr>)
@@ -112,6 +118,7 @@ function EmployeeTable({ employees }) {
                         onClose={() => setIsModalOpen(false)}
                         onConfirm={handleConfirmDelete}
                     ></DeleteAlart>
+                    <UpdateEmployee employee={selectEmployee}></UpdateEmployee>
                 </div>
             </div>
         </div>
