@@ -25,7 +25,7 @@ function EmployeManagement() {
 
         {/* Pending Orders */}
 
-        <EmployeeTable title="🧾All Employee"></EmployeeTable>
+        {/* <EmployeeTable title="🧾All Employee"></EmployeeTable> */}
     </div>
     )
 }

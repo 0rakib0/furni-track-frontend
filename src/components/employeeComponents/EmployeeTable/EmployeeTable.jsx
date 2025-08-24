@@ -1,17 +1,56 @@
 "use client"
+import { toast } from 'react-toastify';
 import React, { useState } from 'react'
 import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
 import ViewSingleEmployee from './ViewSingleEmployee';
+import DeleteAlart from '@/components/deleteConfirmationAlert/DeleteAlart';
 
 function EmployeeTable({ employees }) {
 
+    const [employes, setEmployees] = useState(employees)
     const [selectEmployee, setEmployee] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const handleViewDealer = (employee) =>{
+    const handleViewDealer = (employee) => {
         setEmployee(employee)
         document.getElementById("EmployeeViewModal").showModal();
     }
+
+
+    const handleDeleteClick = (employee) => {
+        setEmployee(employee);
+        setIsModalOpen(true);
+    }
+
+    const handleConfirmDelete = () => {
+
+        if (selectEmployee) {
+            fetch(`http://127.0.0.1:8000/employee/${selectEmployee.id}/`, {
+                method: 'DELETE',
+            })
+
+                .then(res => res)
+                .then(() => {
+                    toast.success("Employee deleted successfully")
+                    const afterDeleteEmployee = employes.filter(employe => employe.id !== selectEmployee.id)
+                    setEmployees(afterDeleteEmployee)
+                })
+
+                .catch(error => {
+                    toast.error(error.message);
+                    setLoading(false)
+                })
+        }
+        setIsModalOpen(false);
+
+
+
+
+
+    }
+
+
 
 
     return (
@@ -36,7 +75,7 @@ function EmployeeTable({ employees }) {
                         <tbody>
 
                             {
-                                employees.map(employee => <tr key={employee.id}>
+                                employes.map(employee => <tr key={employee.id}>
                                     <th>{employee.id}</th>
                                     <td>{employee.id}</td>
                                     <td>{employee.name}</td>
@@ -44,22 +83,21 @@ function EmployeeTable({ employees }) {
                                     <td>{employee.position}</td>
                                     <td>{employee.join_date}</td>
                                     <td>
-                                        <span className={`badge badge-soft ${
-                                            employee.performance_status === 'Good' 
+                                        <span className={`badge badge-soft ${employee.performance_status === 'Good'
                                             ? 'bg-yellow-400 text-black'
-                                            : employee.performance_status === 'Better' 
-                                            ? 'bg-blue-500 text-white'
-                                            : employee.performance_status === 'Best' 
-                                            ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{employee.performance_status}</span>
+                                            : employee.performance_status === 'Better'
+                                                ? 'bg-blue-500 text-white'
+                                                : employee.performance_status === 'Best'
+                                                    ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{employee.performance_status}</span>
                                     </td>
                                     <td>
-                                        <button onClick={()=>handleViewDealer(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                        <button onClick={() => handleViewDealer(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                         </button>
 
-                                        <button className="badge badge-soft text-red-400 mr-2">
+                                        <button onClick={() => handleDeleteClick(employee)} className="badge badge-soft text-red-400 mr-2">
                                             <span><ImBin></ImBin></span>
                                         </button>
-                                        
+
                                         <button className="badge badge-soft badge-primary mr-2">
                                             <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                     </td>
@@ -69,6 +107,11 @@ function EmployeeTable({ employees }) {
                         </tbody>
                     </table>
                     <ViewSingleEmployee employee={selectEmployee}></ViewSingleEmployee>
+                    <DeleteAlart
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        onConfirm={handleConfirmDelete}
+                    ></DeleteAlart>
                 </div>
             </div>
         </div>
