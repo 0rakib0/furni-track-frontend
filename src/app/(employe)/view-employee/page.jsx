@@ -5,15 +5,15 @@ import React from 'react'
 async function ViewEmployee() {
 
     const data = await fetch('http://127.0.0.1:8000/employee/')
-    const employee = await data.json()
+    const employees = await data.json()
 
-    console.log(employee)
+    console.log(employees)
 
 
     return (
         <div>
             <PageTitle></PageTitle>
-            <EmployeeTable></EmployeeTable>
+            <EmployeeTable employees={employees}></EmployeeTable>
         </div>
     )
 }

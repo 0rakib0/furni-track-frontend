@@ -1,7 +1,19 @@
-import Link from 'next/link'
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+import { FaRegEye, FaPencilAlt } from "react-icons/fa";
+import { ImBin } from "react-icons/im";
+import ViewSingleEmployee from './ViewSingleEmployee';
 
-function EmployeeTable() {
+function EmployeeTable({ employees }) {
+
+    const [selectEmployee, setEmployee] = useState(null)
+
+    const handleViewDealer = (employee) =>{
+        setEmployee(employee)
+        document.getElementById("EmployeeViewModal").showModal();
+    }
+
+
     return (
         <div>
             <div className='my-6'>
@@ -22,84 +34,35 @@ function EmployeeTable() {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* row 1 */}
-                            <tr>
-                                <th>1</th>
-                                <td>DL982983</td>
-                                <td>Rakibul Hasan</td>
-                                <td>01473784673</td>
-                                <td>Sale Man</td>
-                                <td>01-01-2024</td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary">Good</span>
-                                </td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                    <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>DL982983</td>
-                                <td>Rakibul Hasan</td>
-                                <td>01473784673</td>
-                                <td>Sale Man</td>
-                                <td>01-01-2024</td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary">Good</span>
-                                </td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                    <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>DL982983</td>
-                                <td>Rakibul Hasan</td>
-                                <td>01473784673</td>
-                                <td>Sale Man</td>
-                                <td>01-01-2024</td>
-                                <td>
-                                    <span className="badge badge-soft badge-warning">Poor</span>
-                                </td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                    <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>DL982983</td>
-                                <td>Rakibul Hasan</td>
-                                <td>01473784673</td>
-                                <td>Sale Man</td>
-                                <td>01-01-2024</td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary">Good</span>
-                                </td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                    <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>DL982983</td>
-                                <td>Rakibul Hasan</td>
-                                <td>01473784673</td>
-                                <td>Sale Man</td>
-                                <td>01-01-2024</td>
-                                <td>
-                                    <span className="badge badge-soft badge-info">Need Practice</span>
-                                </td>
-                                <td>
-                                    <span className="badge badge-soft badge-primary mr-2"><Link href="">View</Link></span>
-                                    <span className="badge badge-soft badge-warning"><Link href="">Delete</Link></span>
-                                </td>
-                            </tr>
+
+                            {
+                                employees.map(employee => <tr key={employee.id}>
+                                    <th>{employee.id}</th>
+                                    <td>{employee.id}</td>
+                                    <td>{employee.name}</td>
+                                    <td>{employee.phone}</td>
+                                    <td>{employee.position}</td>
+                                    <td>{employee.join_date}</td>
+                                    <td>
+                                        <span className="badge badge-soft badge-primary">{employee.performance_status}</span>
+                                    </td>
+                                    <td>
+                                        <button onClick={()=>handleViewDealer(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                        </button>
+
+                                        <button className="badge badge-soft text-red-400 mr-2">
+                                            <span><ImBin></ImBin></span>
+                                        </button>
+                                        
+                                        <button className="badge badge-soft badge-primary mr-2">
+                                            <span> <FaPencilAlt></FaPencilAlt> </span></button>
+                                    </td>
+                                </tr>)
+                            }
+
                         </tbody>
                     </table>
+                    <ViewSingleEmployee employee={selectEmployee}></ViewSingleEmployee>
                 </div>
             </div>
         </div>
