@@ -44,7 +44,13 @@ function EmployeeTable({ employees }) {
                                     <td>{employee.position}</td>
                                     <td>{employee.join_date}</td>
                                     <td>
-                                        <span className="badge badge-soft badge-primary">{employee.performance_status}</span>
+                                        <span className={`badge badge-soft ${
+                                            employee.performance_status === 'Good' 
+                                            ? 'bg-yellow-400 text-black'
+                                            : employee.performance_status === 'Better' 
+                                            ? 'bg-blue-500 text-white'
+                                            : employee.performance_status === 'Best' 
+                                            ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{employee.performance_status}</span>
                                     </td>
                                     <td>
                                         <button onClick={()=>handleViewDealer(employee)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
