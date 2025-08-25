@@ -41,7 +41,7 @@ function AddEmployee() {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                toast.success("Dealer Data Successfully added");
+                toast.success("Employee Data Successfully added");
                 setLoading(false)
                 form.reset();
             })
