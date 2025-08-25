@@ -1,10 +1,12 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 
 function UpdateEmployee({ employee }) {
     const [loading, setLoading] = useState(false)
     const employeeId = employee?.id
+    const router = useRouter()
 
     const handleFormSubMit = event => {
         event.preventDefault()
@@ -42,6 +44,7 @@ function UpdateEmployee({ employee }) {
                 setLoading(false)
                 form.reset();
                 document.getElementById('UpdateEmployeeModal').close();
+                router.push("/employee-management");
             })
 
             .catch(error => {

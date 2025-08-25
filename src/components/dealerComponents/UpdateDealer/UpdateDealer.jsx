@@ -1,9 +1,11 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 function UpdateDealer({ dealer }) {
     const [loading, setLoading] = useState(false)
     const dealerId = dealer?.id
+    const router = useRouter()
 
 
     const handleFormSubMit = event => {
@@ -36,6 +38,7 @@ function UpdateDealer({ dealer }) {
                 setLoading(false)
                 form.reset();
                 document.getElementById('update_dealer').close();
+                router.push('/manage-dealers')
 
             })
 
