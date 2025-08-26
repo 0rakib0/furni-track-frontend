@@ -47,9 +47,6 @@ function UpdateDealer({ dealer }) {
                 setLoading(false)
             })
 
-
-
-
     }
 
 
