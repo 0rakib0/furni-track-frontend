@@ -1,5 +1,6 @@
 'use client'
 import React, { memo, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 
 function OrderAdd() {
 
@@ -9,9 +10,9 @@ function OrderAdd() {
 
     console.log(dealers.length)
 
-    useEffect(() =>{
-        const fetchData = async () =>{
-            try{
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
                 const dealerRes = await fetch('http://127.0.0.1:8000/dealers/')
                 const dealerData = await dealerRes.json()
                 setDealers(dealerData)
@@ -28,7 +29,7 @@ function OrderAdd() {
 
 
 
-    const handleFormSubmit = event =>{
+    const handleFormSubmit = event => {
         event.preventDefault()
         setLoading(true)
 
@@ -41,21 +42,35 @@ function OrderAdd() {
         const frameShowDate = form.frame_show_date.value;
         const dealer = form.dealer.value;
         const employee = form.employee.value;
-        const deliveryStatus = form.delivery_status.value;
-        const Data = {
-            name,
-            memoNumber,
-            phone,
-            deliveryAdress,
-            deliveryDate,
-            frameShowDate,
-            dealer,
-            employee,
-            deliveryStatus
-        }
 
+        const orderFormData = new FormData()
 
-        console.log(Data)
+        orderFormData.append('customar_name', name)
+        orderFormData.append('memo_number', memoNumber)
+        orderFormData.append('cutomar_phone', phone)
+        orderFormData.append('delivery_address', deliveryAdress)
+        orderFormData.append('delivery_date', deliveryDate)
+        orderFormData.append('frame_show_date', frameShowDate)
+        orderFormData.append('dealer', dealer)
+        orderFormData.append('employee', employee)
+
+        fetch('http://127.0.0.1:8000/orders/', {
+            method: "POST",
+            body: orderFormData
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                toast.success("Order Data Successfully added");
+                setLoading(false)
+                form.reset();
+            })
+
+            .catch((error) => {
+                toast.error(error);
+                setLoading(false)
+            })
+
 
 
 
@@ -93,7 +108,7 @@ function OrderAdd() {
                     </fieldset>
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend text-lg font-thin">Frame Show Date</legend>
-                        <input type="text" name='frame_show_date' className="input w-full focus:outline-none" placeholder="Frame Show Date" />
+                        <input type="date" name='frame_show_date' className="input w-full focus:outline-none" placeholder="Frame Show Date" />
                     </fieldset>
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend text-lg font-thin">Select Dealer</legend>
@@ -117,13 +132,13 @@ function OrderAdd() {
                             }
                         </select>
                     </fieldset>
-                    <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-ful border p-4">
+                    {/* <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-ful border p-4">
                         <legend className="fieldset-legend">Delivery Status</legend>
                         <label className="label">
                             <input type="checkbox" name='delivery_status' defaultChecked className="checkbox" />
                             delivered/pending
                         </label>
-                    </fieldset>
+                    </fieldset> */}
                     <button type='submit' className='w-full py-3 rounded-md text-white hover:bg-white hover:border hover:text-[#57c7d4] bg-[#57c7d4] transition duration-300 ease-in-out my-4'>Add Order</button>
                 </div>
             </form>
