@@ -1,5 +1,5 @@
 import Card from "@/components/deshbord/card";
-import OrdersTable from "@/components/orders_Table/OrdersTable";
+import OrdersTable from "@/components/orderComponents/OrdersTable";
 import Image from "next/image";
 
 export default function Home() {

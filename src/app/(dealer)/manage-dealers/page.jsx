@@ -1,4 +1,4 @@
-import OrdersTable from '@/components/orders_Table/OrdersTable'
+import OrdersTable from '@/components/orderComponents/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'

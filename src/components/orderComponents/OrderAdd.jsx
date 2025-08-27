@@ -8,7 +8,6 @@ function OrderAdd() {
     const [dealers, setDealers] = useState([])
     const [employees, setEmployees] = useState([])
 
-    console.log(dealers.length)
 
     useEffect(() => {
         const fetchData = async () => {

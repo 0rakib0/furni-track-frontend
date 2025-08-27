@@ -1,5 +1,5 @@
 import Card from '@/components/deshbord/card'
-import OrdersTable from '@/components/orders_Table/OrdersTable'
+import OrdersTable from '@/components/orderComponents/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
@@ -8,7 +8,7 @@ function OrderManagement() {
   
   const orderRout = [
     {name:'📝 Add Order', path:'/add-order', id:'1'},
-    {name:'📄 View Orders', path:'/', id:'2'},
+    {name:'📄 View Orders', path:'/view-orders', id:'2'},
     {name:'📈 Orders Report', path:'/order-report', id:'3'},
     {name:'📆 Delivery Calendar', path:'/', id:'4'},
     {name:'🔍 Filter Orders', path:'/', id:'5'},
