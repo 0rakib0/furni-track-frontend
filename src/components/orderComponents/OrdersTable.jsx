@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { ImBin } from "react-icons/im";
 import ViewSingleOrder from './ViewSingleOrder';
 import DeleteAlart from '../deleteConfirmationAlert/DeleteAlart';
+import OrderUpdate from './OrderUpdate';
 
 function OrdersTable({ title, orders }) {
     const [ordess, setOrders] = useState(orders)
@@ -14,6 +15,13 @@ function OrdersTable({ title, orders }) {
     const handleViewSingleOrder = order => {
         setSelectOrder(order)
         document.getElementById('viewSingleOrder').showModal()
+    }
+
+
+    const handleUpdateOrder = order =>{
+        setSelectOrder(order)
+        document.getElementById('UpdateOrderModal').showModal();
+
     }
 
 
@@ -88,7 +96,7 @@ function OrdersTable({ title, orders }) {
                                             <span><ImBin></ImBin></span>
                                         </button>
 
-                                        <button className="badge badge-soft badge-primary mr-2">
+                                        <button onClick={()=> handleUpdateOrder(order)} className="badge badge-soft badge-primary mr-2">
                                             <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                     </td>
                                 </tr>
@@ -103,8 +111,8 @@ function OrdersTable({ title, orders }) {
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={handleConfirmDelete}
                 >
-
                 </DeleteAlart>
+                <OrderUpdate></OrderUpdate>
             </div>
         </div>
     )
