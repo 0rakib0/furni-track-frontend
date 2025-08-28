@@ -112,7 +112,7 @@ function OrdersTable({ title, orders }) {
                     onConfirm={handleConfirmDelete}
                 >
                 </DeleteAlart>
-                <OrderUpdate></OrderUpdate>
+                <OrderUpdate order={selectOrder}></OrderUpdate>
             </div>
         </div>
     )

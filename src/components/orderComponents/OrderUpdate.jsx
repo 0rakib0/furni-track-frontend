@@ -1,6 +1,7 @@
 import React from 'react'
 
 function OrderUpdate({ order }) {
+
     return (
         <div>
             <dialog id="UpdateOrderModal" className="modal">
@@ -18,15 +19,15 @@ function OrderUpdate({ order }) {
                             </fieldset>
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend text-lg font-thin">Memo Number</legend>
-                                <input type="text" name='memo_number' className="input w-full focus:outline-none" placeholder="Memo Number" />
+                                <input type="text" name='memo_number' className="input w-full focus:outline-none" defaultValue={order?.memo_number} />
                             </fieldset>
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend text-lg font-thin">Customar Phone</legend>
-                                <input type="text" name='phone' className="input w-full focus:outline-none" placeholder="Cusatomar phone number" />
+                                <input type="text" name='phone' className="input w-full focus:outline-none" defaultValue={order?.cutomar_phone} />
                             </fieldset>
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend text-lg font-thin">Delivery Address</legend>
-                                <input type="text" name='delivery_address' className="input w-full focus:outline-none" placeholder="Delivery Address" />
+                                <input type="text" name='delivery_address' className="input w-full focus:outline-none" defaultValue={order?.delivery_address} />
                             </fieldset>
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend text-lg font-thin">Delivery Date</legend>
