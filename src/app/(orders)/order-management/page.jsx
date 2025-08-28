@@ -29,7 +29,7 @@ function OrderManagement() {
 
         {/* Pending Orders */}
 
-        <OrdersTable title="🧾Pendding Orders"></OrdersTable>
+        {/* <OrdersTable title="🧾Pendding Orders"></OrdersTable> */}
     </div>
   )
 }

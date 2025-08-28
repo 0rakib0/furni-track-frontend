@@ -59,7 +59,7 @@ function ViewSingleOrder({ order }) {
                         <div className="flex justify-between border-b pb-2">
                             <span className="font-semibold">Order Status:</span>
                             <span className="badge">
-                                <span className={`badge badge-soft ${order.order_status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{order.order_status ? "Delivered" : "Pending"}</span>
+                                <span className={`badge badge-soft ${order?.order_status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{order?.order_status ? "Delivered" : "Pending"}</span>
                             </span>
                         </div>
                     </div>

@@ -13,10 +13,10 @@ export default function Home() {
         <Card></Card>
         {/* recently orderd item product */}
         <div className="my-8">
-          <OrdersTable title="🧾🆕Recently Orderd Items"></OrdersTable>
+          {/* <OrdersTable title="🧾🆕Recently Orderd Items"></OrdersTable> */}
         </div>
         {/* Up Comming Delivery Order */}
-        <OrdersTable title={'🚚🕒Up-Comming Delivery Order'}></OrdersTable>
+        {/* <OrdersTable title={'🚚🕒Up-Comming Delivery Order'}></OrdersTable> */}
       </div>
     </div>
   );
