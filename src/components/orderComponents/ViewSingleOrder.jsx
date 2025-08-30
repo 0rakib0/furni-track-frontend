@@ -53,7 +53,7 @@ function ViewSingleOrder({ order }) {
                         <div className="border-t border-b py-3 mt-4">
                             <div className="flex justify-between">
                                 <span className="font-semibold">Product Price:</span>
-                                <span>৳ {order?.product_price}</span>
+                                <span>৳ {order?.total_price}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="font-semibold">Advance Payment:</span>
@@ -61,7 +61,9 @@ function ViewSingleOrder({ order }) {
                             </div>
                             <div className="flex justify-between font-bold">
                                 <span>Due Amount:</span>
-                                <span>৳ {order?.product_price - order?.advance_payment}</span>
+                                <span>
+                                    ৳ {(parseFloat(order?.product_price || 0) - parseFloat(order?.advance_payment || 0)).toFixed(2)}
+                                </span>
                             </div>
                         </div>
 
