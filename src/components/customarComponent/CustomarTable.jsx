@@ -1,8 +1,19 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { ImBin } from "react-icons/im";
+import ViewCustomar from './ViewCustomar';
 
 function CustomarTable({ customars }) {
+        const [selectCustomar, setSelectCustomar] = useState(null)
+
+
+    const handleCustomarView = (customar) =>{
+        setSelectCustomar(customar)
+        document.getElementById('viewsinglecustomar').showModal()
+    }   
+
+
     return (
         <div>
             <div className='my-6'>
@@ -31,7 +42,7 @@ function CustomarTable({ customars }) {
                                         <td>{customar.email}</td>
                                         <td>{customar.address}</td>
                                         <td>
-                                            <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            <button onClick={() => handleCustomarView(customar)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
 
                                             <button className="badge badge-soft text-red-400 mr-2">
@@ -49,6 +60,7 @@ function CustomarTable({ customars }) {
                     </table>
                 </div>
             </div>
+            <ViewCustomar customar={selectCustomar}></ViewCustomar>
         </div>
     )
 }
