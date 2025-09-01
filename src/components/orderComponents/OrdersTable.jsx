@@ -8,7 +8,7 @@ import DeleteAlart from '../deleteConfirmationAlert/DeleteAlart';
 import OrderUpdate from './OrderUpdate';
 
 function OrdersTable({ title, orders }) {
-    const [ordess, setOrders] = useState(orders)
+    const [orderss, setOrders] = useState(orders || [])
     const [selectOrder, setSelectOrder] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -42,7 +42,7 @@ function OrdersTable({ title, orders }) {
                 .then(res => res)
                 .then(() => {
                     toast.success("Order deleted successfully")
-                    const afterDeleteOrder = ordess.filter(order => order.id !== selectOrder.id)
+                    const afterDeleteOrder = orderss.filter(order => order.id !== selectOrder.id)
                     setOrders(afterDeleteOrder)
                 })
 
@@ -52,9 +52,6 @@ function OrdersTable({ title, orders }) {
                 })
         }
         setIsModalOpen(false);
-
-
-
 
 
     }
@@ -79,11 +76,11 @@ function OrdersTable({ title, orders }) {
                     <tbody>
 
                         {
-                            ordess.map(order =>
+                            orderss.map(order =>
                                 <tr key={order?.id}>
                                     <th>{order?.id}</th>
                                     <td>{order?.memo_number}</td>
-                                    <td>{order?.customar_name}</td>
+                                    <td>{order?.customar?.name}</td>
                                     <td>{order?.delivery_date}</td>
                                     <td>
                                         <span className={`badge badge-soft ${order?.order_status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{order?.order_status ? "Delivered" : "Pending"}</span>

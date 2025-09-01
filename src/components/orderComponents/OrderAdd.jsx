@@ -34,6 +34,8 @@ function OrderAdd() {
 
 
 
+
+
     const handleFormSubmit = event => {
         event.preventDefault()
         setLoading(true)
@@ -56,7 +58,7 @@ function OrderAdd() {
 
         const orderFormData = new FormData()
 
-        orderFormData.append('customar', customar)
+        orderFormData.append('customar_id', customar)
         orderFormData.append('memo_number', memoNumber)
         orderFormData.append('product_name', productTitle)
         orderFormData.append('details', details)
@@ -67,8 +69,8 @@ function OrderAdd() {
         orderFormData.append('delivery_date', deliveryDate)
         orderFormData.append('next_advance_payment_date', next_advance_payment_date)
         orderFormData.append('frame_show_date', frameShowDate)
-        orderFormData.append('dealer', dealer)
-        orderFormData.append('employee', employee)
+        orderFormData.append('dealer_id', dealer)
+        orderFormData.append('employee_id', employee)
 
         fetch('http://127.0.0.1:8000/orders/', {
             method: "POST",
@@ -77,21 +79,22 @@ function OrderAdd() {
 
             .then(res => res.json())
             .then(data => {
-                toast.success("Order Data Successfully added");
-                setLoading(false)
+                console.log(data)
+                if (data) {
+                    toast.success("Order Data Successfully added");
+                    setLoading(false)
+                } else {
+                    toast.error("Order Not added, somethink wrong!");
+                    setLoading(false)
+                }
+
                 form.reset();
             })
 
             .catch((error) => {
-                toast.error(error);
+                toast.error("Order not added, somethink wrong!");
                 setLoading(false)
             })
-
-
-
-
-
-
 
     }
 
