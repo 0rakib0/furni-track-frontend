@@ -102,7 +102,7 @@ function ViewSingleOrder({ order }) {
                     <div className="flex justify-between items-center border-t pt-3 mt-6">
                         <span className="font-semibold">Order Status:</span>
                         <span
-                            className={`px-4 py-1 rounded-md text-white text-sm font-medium ${order?.order_status === "delivered"
+                            className={`px-4 py-1 rounded-md text-white text-sm font-medium ${order?.order_status 
                                     ? "bg-green-500"
                                     : order?.order_status === "on_hold"
                                         ? "bg-yellow-500"
@@ -111,7 +111,7 @@ function ViewSingleOrder({ order }) {
                                             : "bg-gray-500"
                                 }`}
                         >
-                            {order?.order_status ? order?.order_status.toUpperCase() : "Pending"}
+                            {order?.order_status ? 'Delivered' : "Pending"}
                         </span>
                     </div>
 

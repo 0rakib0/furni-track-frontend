@@ -7,10 +7,11 @@ function NavBar() {
   const navItems = [
     { id: '1', name: 'Home', path: '/' },
     { id: '2', name: 'Manage Orders', path: '/order-management' },
-    { id: '3', name: 'Manage Dealer', path: '/manage-dealers' },
-    { id: '4', name: 'Manage Employee', path: '/employee-management' },
-    { id: '5', name: 'About', path: '/about-furnitack' },
-    { id: '6', name: 'Contact', path: '/contact-us' },
+    { id: '3', name: 'Manage Customar', path: '/customar-management' },
+    { id: '4', name: 'Manage Dealer', path: '/manage-dealers' },
+    { id: '5', name: 'Manage Employee', path: '/employee-management' },
+    { id: '6', name: 'About', path: '/about-furnitack' },
+    { id: '7', name: 'Contact', path: '/contact-us' },
   ]
 
 
