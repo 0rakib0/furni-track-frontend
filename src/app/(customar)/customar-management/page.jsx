@@ -7,6 +7,7 @@ function CustomarManagement() {
 
     const customarRout = [
         { name: '📝 Add Customar', path: '/add-customar', id: '1' },
+        { name: '📄 View Customar', path: '/view-customar', id: '2' },
     ]
 
     return (
