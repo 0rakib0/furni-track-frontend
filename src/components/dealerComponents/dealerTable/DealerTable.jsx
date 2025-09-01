@@ -24,7 +24,6 @@ function DealerTable({ dealers }) {
     }
 
     const handleDeleteClick = (dealer) => {
-        console.log("Dealer Button clicked")
         setSelectDealer(dealer);
         setIsModalOpen(true);
     }
