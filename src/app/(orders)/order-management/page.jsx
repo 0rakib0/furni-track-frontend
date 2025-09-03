@@ -11,7 +11,7 @@ async function OrderManagement() {
   const dashbordOrders = await ordersDashbordDataRes.json()
 
   const recentOrder = dashbordOrders.recent_order
-  const upcommingDeliveryOrders = dashbordOrders.pending_order
+  const upcommingDeliveryOrders = dashbordOrders.upcomming_delivery
 
   
   const orderRout = [
