@@ -1,14 +1,26 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 
 function OrderSearch() {
+    const [loading, setLoading] = useState(false)
+    const [orders, setOrders] = useState(null)
 
-    const handleSearch = (event) => {
+    const handleSearch = async (event) => {
         event.preventDefault()
-        const searchValue = event.target.search.value;
-        console.log(searchValue)
+        const form = event.target;
+        const searchValue = form.search.value;
+        setLoading(true)
+        const res = await fetch(`http://127.0.0.1:8000/order-search/?order-search=${searchValue}`)
+        const orders = await res.json()
+        setOrders(orders)
+        setLoading(false)
+        form.reset();
+
+
     }
+
+    console.log("Filter Orders=>", orders)
 
 
     return (
@@ -16,7 +28,7 @@ function OrderSearch() {
             <form onSubmit={handleSearch}>
                 <label className="input">
                     <input type="search" className='outline-none' name='search' required placeholder="Order search by memo or phone" />
-                    <button><IoSearchOutline /></button>
+                    <button>{loading ? <span className="loading loading-spinner loading-md"></span> : <IoSearchOutline /> }</button>
                 </label>
             </form>
         </div>
