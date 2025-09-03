@@ -18,7 +18,7 @@ function OrdersTable({ title, orders }) {
     }
 
 
-    const handleUpdateOrder = order =>{
+    const handleUpdateOrder = order => {
         setSelectOrder(order)
         document.getElementById('UpdateOrderModal').showModal();
 
@@ -75,7 +75,7 @@ function OrdersTable({ title, orders }) {
                     </thead>
                     <tbody>
 
-                        {
+                        {orderss.length > 0 ? (
                             orderss.map(order =>
                                 <tr key={order?.id}>
                                     <th>{order?.id}</th>
@@ -93,11 +93,19 @@ function OrdersTable({ title, orders }) {
                                             <span><ImBin></ImBin></span>
                                         </button>
 
-                                        <button onClick={()=> handleUpdateOrder(order)} className="badge badge-soft badge-primary mr-2">
+                                        <button onClick={() => handleUpdateOrder(order)} className="badge badge-soft badge-primary mr-2">
                                             <span> <FaPencilAlt></FaPencilAlt> </span></button>
                                     </td>
                                 </tr>
                             )
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="text-center py-4 text-gray-500">
+                                    No Releted Data Found 
+                                </td>
+                            </tr>
+                        )
+
                         }
 
                     </tbody>

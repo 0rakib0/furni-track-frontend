@@ -4,7 +4,15 @@ import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
 
-function OrderManagement() {
+async function OrderManagement() {
+
+
+  const ordersDashbordDataRes = await fetch("http://127.0.0.1:8000/order-management/")
+  const dashbordOrders = await ordersDashbordDataRes.json()
+
+  const recentOrder = dashbordOrders.recent_order
+  const upcommingDeliveryOrders = dashbordOrders.pending_order
+
   
   const orderRout = [
     {name:'📝 Add Order', path:'/add-order', id:'1'},
@@ -27,9 +35,11 @@ function OrderManagement() {
         }
       </div>
 
-        {/* Pending Orders */}
+        {/* Recent Orders */}
+        <OrdersTable title={"Recent Orders"} orders={recentOrder}></OrdersTable>
 
-        {/* <OrdersTable title="🧾Pendding Orders"></OrdersTable> */}
+        {/* Upcomming delivery Orders */}
+        <OrdersTable title={"Upcomming Delivery Orders"} orders={upcommingDeliveryOrders}></OrdersTable>
     </div>
   )
 }
