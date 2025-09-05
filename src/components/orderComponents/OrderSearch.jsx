@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 
-function OrderSearch() {
+function OrderSearch({ setOrders }) {
     const [loading, setLoading] = useState(false)
-    const [orders, setOrders] = useState(null)
+    
 
     const handleSearch = async (event) => {
         event.preventDefault()
@@ -16,11 +16,7 @@ function OrderSearch() {
         setOrders(orders)
         setLoading(false)
         form.reset();
-
-
     }
-
-    console.log("Filter Orders=>", orders)
 
 
     return (

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegEye, FaPencilAlt } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { ImBin } from "react-icons/im";
@@ -11,6 +11,12 @@ function OrdersTable({ title, orders }) {
     const [orderss, setOrders] = useState(orders || [])
     const [selectOrder, setSelectOrder] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+
+    useEffect(() => {
+        setOrders(orders || [])
+    }, [orders])
+
 
     const handleViewSingleOrder = order => {
         setSelectOrder(order)
@@ -60,7 +66,7 @@ function OrdersTable({ title, orders }) {
     return (
         <div className='my-6'>
             <h3 className='md:text-2xl text-xl mb-2 text-[#57c7d4]'>{title}</h3>
-            
+
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 shadow-lg">
                 <table className="table">
                     {/* head */}
@@ -102,7 +108,7 @@ function OrdersTable({ title, orders }) {
                         ) : (
                             <tr>
                                 <td colSpan="6" className="text-center py-4 text-gray-500">
-                                    No Releted Data Found 
+                                    No Releted Data Found
                                 </td>
                             </tr>
                         )
