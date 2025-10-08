@@ -13,6 +13,12 @@ async function OrderManagement() {
   const recentOrder = dashbordOrders.recent_order
   const upcommingDeliveryOrders = dashbordOrders.upcomming_delivery
 
+  const recent_delivery_orders_res = await fetch("http://127.0.0.1:8000/recent-delivery-order/")
+  const recent_delivery_orders = await recent_delivery_orders_res.json()
+  const todays_delivery_orders = recent_delivery_orders.todays_delivery
+
+
+
   
   const orderRout = [
     {name:'📝 Add Order', path:'/add-order', id:'1'},
@@ -34,6 +40,9 @@ async function OrderManagement() {
           orderRout.map(rout =><RoutCard key={rout.id} name={rout.name} path={rout.path}></RoutCard>)
         }
       </div>
+
+        {/* todays delivery orders */}
+        <OrdersTable title={"Todays Delivery Orders"} orders={todays_delivery_orders}></OrdersTable>
 
         {/* Recent Orders */}
         <OrdersTable title={"Recent Orders"} orders={recentOrder}></OrdersTable>
