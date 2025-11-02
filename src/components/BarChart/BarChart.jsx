@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
     BarChart as ReBarChart,
@@ -8,60 +8,51 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    ResponsiveContainer
 } from 'recharts';
 
 function BarChart() {
+    const [orderData, setOrderData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
-    const data = [
-        {
-            "name": "Page A",
-            "uv": 4000,
-            "pv": 2400
-        },
-        {
-            "name": "Page B",
-            "uv": 3000,
-            "pv": 1398
-        },
-        {
-            "name": "Page C",
-            "uv": 2000,
-            "pv": 9800
-        },
-        {
-            "name": "Page D",
-            "uv": 2780,
-            "pv": 3908
-        },
-        {
-            "name": "Page E",
-            "uv": 1890,
-            "pv": 4800
-        },
-        {
-            "name": "Page F",
-            "uv": 2390,
-            "pv": 3800
-        },
-        {
-            "name": "Page G",
-            "uv": 3490,
-            "pv": 4300
+
+    useEffect(() =>{
+        const fetchOrder = async () =>{
+            try{
+                setLoading(true)
+                setError(null)
+                const res = await fetch("http://127.0.0.1:8000/chart-data/")
+                if(!res.ok) throw new Error(`HTTP Error: ${res.status}`)
+                const data = await res.json()
+                setOrderData(data.order_data.map(item => ({
+                    name: item.date,
+                    count: item.count
+                })))
+            } catch(err){
+                setError(err.message)
+            } finally {
+                setLoading(false)
+            }
         }
-    ]
+        fetchOrder()
+    },[])
 
+    if(loading) return <p>Loading...</p>;
+    if(error) return <p className='text-red-500'>Error: {error}</p>
     return (
-        <div>
-            <ReBarChart width={500} height={250} data={data}>
+        <div className='w-full h-[350px]'>
+            <ResponsiveContainer width="100%" height="100%">
+            <ReBarChart width={500} height={250} data={orderData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
-                <YAxis />
+                <YAxis domain={[0, 10]}/>
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
+                <Bar dataKey="count" fill="#57c7d4" />
             </ReBarChart>
+            </ResponsiveContainer>
         </div>
     );
 }

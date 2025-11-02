@@ -3,6 +3,7 @@ import OrdersTable from '@/components/orderComponents/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
+import recentOrders from '../rcentorder'
 
 async function OrderManagement() {
 
@@ -10,12 +11,15 @@ async function OrderManagement() {
   const ordersDashbordDataRes = await fetch("http://127.0.0.1:8000/order-management/")
   const dashbordOrders = await ordersDashbordDataRes.json()
 
+
+  
   const recentOrder = dashbordOrders.recent_order
   const upcommingDeliveryOrders = dashbordOrders.upcomming_delivery
 
-  const recent_delivery_orders_res = await fetch("http://127.0.0.1:8000/recent-delivery-order/")
-  const recent_delivery_orders = await recent_delivery_orders_res.json()
+  
+  const recent_delivery_orders = await recentOrders()
   const todays_delivery_orders = recent_delivery_orders.todays_delivery
+  
 
 
 
@@ -23,7 +27,7 @@ async function OrderManagement() {
   const orderRout = [
     {name:'📝 Add Order', path:'/add-order', id:'1'},
     {name:'📄 View Orders', path:'/view-orders', id:'2'},
-    {name:'📈 Orders Report', path:'/order-report', id:'3'},
+    {name:'📈 Orders Delivery Report', path:'/order-report', id:'3'},
     {name:'📆 Delivery Calendar', path:'/', id:'4'},
     {name:'🔍 Filter Orders', path:'/', id:'5'},
     {name:'📦 Shaduled Delivery', path:'/', id:'6'},
