@@ -28,7 +28,7 @@ async function OrderManagement() {
     {name:'📝 Add Order', path:'/add-order', id:'1'},
     {name:'📄 View Orders', path:'/view-orders', id:'2'},
     {name:'📈 Orders Delivery Report', path:'/order-report', id:'3'},
-    {name:'📆 Delivery Calendar', path:'/', id:'4'},
+    {name:'📆 Delivery Calendar', path:'/delivery-calender', id:'4'},
     {name:'🔍 Filter Orders', path:'/', id:'5'},
     {name:'📦 Shaduled Delivery', path:'/', id:'6'},
     {name:'📄 All Order Sheet', path:'/', id:'7'},

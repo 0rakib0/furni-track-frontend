@@ -1,0 +1,24 @@
+.react-calendar__tile.highlight-date {
+  background-color: #57c7d4;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.3s ease; /* 🟢 smooth animation */
+}
+
+.react-calendar__tile.highlight-date:hover {
+  background-color: #00e3fc !important;
+  transform: scale(1.05); /* 🟣 একটু zoom effect */
+  cursor: pointer;
+}
+
+.react-calendar{
+  width: 100%;
+  font-size: 25px;
+  
+}
+
+.react-calendar .react-calendar__tile{
+  border: 1px solid #57c7d4;
+  border-radius: 5px;
+  height: 5rem;
+}
