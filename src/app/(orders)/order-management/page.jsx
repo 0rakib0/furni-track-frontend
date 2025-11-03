@@ -32,7 +32,7 @@ async function OrderManagement() {
     {name:'🔍 Filter Orders', path:'/filter-orders', id:'5'},
     {name:'📦 Shaduled Delivery', path:'/', id:'6'},
     {name:'📄 All Order Sheet', path:'/', id:'7'},
-    {name:'🔔 Delivered Orders', path:'/', id:'8'},
+    {name:'🔔 Delivered Orders', path:'/delivered-order', id:'8'},
   ]
 
   return (

@@ -76,6 +76,7 @@ function OrdersTable({ title, orders }) {
                             <th>Memo</th>
                             <th>Customar Name</th>
                             <th>Delivery Date</th>
+                            <th>Total Price</th>
                             <th>Order Status</th>
                             <th>Action</th>
                         </tr>
@@ -89,6 +90,7 @@ function OrdersTable({ title, orders }) {
                                     <td>{order?.memo_number}</td>
                                     <td>{order?.customar?.name}</td>
                                     <td>{order?.delivery_date}</td>
+                                    <td>{order?.total_price} <span>&#2547;</span>.</td>
                                     <td>
                                         <span className={`badge badge-soft ${order?.order_status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{order?.order_status ? "Delivered" : "Pending"}</span>
                                     </td>
