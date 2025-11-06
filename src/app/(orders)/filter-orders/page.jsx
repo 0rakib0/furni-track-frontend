@@ -1,39 +1,51 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OrderWappers from "../OrderWappers";
+import PageTitle from "@/components/PageTitle/PageTitle";
+import { useRouter } from "next/navigation";
 
 export default function OrderFilterClient({ orders }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [filteredOrders, setFilteredOrders] = useState(orders);
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const router = useRouter();
+
+
+
 
   const handleFilter = () => {
     if (!startDate && !endDate) {
-      setFilteredOrders(orders);
-      return;
+      return Null;
     }
+      const fetchFilterOrderData = async () => {
+        try {
+          setLoading(true)
+          const res = await fetch(`http://127.0.0.1:8000/order-data-filter/?start_date=${startDate}&end_date=${endDate}`)
+          const data = await res.json()
+          setFilteredOrders(data)
+        } catch (err) {
+          setError(err.message)
+        } finally {
+          setLoading(false)
+        }
+      }
+      fetchFilterOrderData()
+      router.push(`?start_date=${startDate}&end_date=${endDate}`);
 
-
-    console.log(startDate)
-    console.log(endDate)
-    // const filtered = orders.filter((order) => {
-    //   const orderDate = new Date(order.date); // ধরছি order.date আছে
-    //   const start = startDate ? new Date(startDate) : new Date("1900-01-01");
-    //   const end = endDate ? new Date(endDate) : new Date("2100-12-31");
-    //   return orderDate >= start && orderDate <= end;
-    // });
-
-    setFilteredOrders(filtered);
   };
 
   const handleClear = () => {
     setStartDate("");
     setEndDate("");
-    setFilteredOrders(orders);
+    setFilteredOrders(null)
   };
 
   return (
     <div className="bg-white shadow-md rounded-xl p-6 mb-6">
+      <PageTitle></PageTitle>
       <h2 className="text-lg font-semibold mb-4 text-gray-700">Filter Orders</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -77,7 +89,9 @@ export default function OrderFilterClient({ orders }) {
       </div>
 
       <div className="mt-6">
-        <OrderWappers initialorder={filteredOrders} />
+        {filteredOrders && (
+          <OrderWappers initialorder={filteredOrders} />
+        )}
       </div>
     </div>
   );
