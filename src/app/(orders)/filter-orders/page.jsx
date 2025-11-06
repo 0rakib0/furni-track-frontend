@@ -4,10 +4,10 @@ import OrderWappers from "../OrderWappers";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import { useRouter } from "next/navigation";
 
-export default function OrderFilterClient({ orders }) {
+export default function OrderFilterClient() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [filteredOrders, setFilteredOrders] = useState(orders);
+  const [filteredOrders, setFilteredOrders] = useState('');
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -42,6 +42,8 @@ export default function OrderFilterClient({ orders }) {
     setEndDate("");
     setFilteredOrders(null)
   };
+
+  console.log(filteredOrders)
 
   return (
     <div className="bg-white shadow-md rounded-xl p-6 mb-6">
