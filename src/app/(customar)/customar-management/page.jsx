@@ -9,7 +9,7 @@ function CustomarManagement() {
         { name: '📝 Add Customar', path: '/add-customar', id: '1' },
         { name: '📄 View Customar', path: '/view-customar', id: '2' },
         { name: '🔍 Send Offer Mails', path: '/send-offer-mail', id: '3' },
-        { name: '📆 Late Delivery Customar', path: '/view-customar', id: '4' },
+        { name: '📆 Late Delivery Customar', path: '/late-delivery-customar-list', id: '4' },
     ]
 
     return (
