@@ -8,7 +8,7 @@ function CustomarManagement() {
     const customarRout = [
         { name: '📝 Add Customar', path: '/add-customar', id: '1' },
         { name: '📄 View Customar', path: '/view-customar', id: '2' },
-        { name: '🔍 Filter Order By Customar', path: '/view-customar', id: '3' },
+        { name: '🔍 Send Offer Mails', path: '/send-offer-mail', id: '3' },
         { name: '📆 Late Delivery Customar', path: '/view-customar', id: '4' },
     ]
 
