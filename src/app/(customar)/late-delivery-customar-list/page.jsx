@@ -1,7 +1,12 @@
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 
-function LateDeliveryCustomar() {
+async function LateDeliveryCustomar() {
+
+    const lateDeliveryDateRes = await fetch('http://127.0.0.1:8000/late-delivery-orders/')
+    const lateDeliveryDate = await lateDeliveryDateRes.json()
+
+
     return (
         <div>
             <PageTitle></PageTitle>
@@ -21,20 +26,24 @@ function LateDeliveryCustomar() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Kamal</td>
-                                <td>918</td>
-                                <td>11-02-2025</td>
-                                <td className="badge badge-soft text-red-400 mr-2">6 days</td>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>Kamal</td>
-                                <td>918</td>
-                                <td>11-02-2025</td>
-                                <td>4 days</td>
-                            </tr>
+                            {
+                                lateDeliveryDate.map(order => {
+                                    const deliveryDate = new Date(order?.delivery_date)
+                                    const initialDate = new Date(order?.initial_dalivery_date)
+
+                                    const diffDays = Math.ceil(
+                                        Math.abs(deliveryDate - initialDate) / (1000 * 60 * 60 * 24)
+                                    );
+
+                                    return <tr key={order?.id}>
+                                        <th>{order?.id}</th>
+                                        <td>{order?.customar?.name}</td>
+                                        <td>{order?.memo_number}</td>
+                                        <td>{order?.delivery_date}</td>
+                                        <td className={`badge badge-soft mt-2 ${diffDays > 5 ? 'text-red-400':'text-black'} mr-2`}>{diffDays}</td>
+                                    </tr>
+                                })
+                            }
                         </tbody>
                     </table>
                 </div>
