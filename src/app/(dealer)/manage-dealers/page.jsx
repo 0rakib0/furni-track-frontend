@@ -9,8 +9,8 @@ function ManageDealer() {
     const dealerRout = [
     {name:'📝 Add Dealer', path:'/add-dealer', id:'1'},
     {name:'📄 View Dealer', path:'/view-dealer', id:'2'},
-    {name:'📈 Dealer Payment Report', path:'/', id:'3'},
-    {name:'📆 Dealer Payment', path:'/', id:'4'},
+    {name:'📆 Dealer Payment', path:'/dealer-payment', id:'3'},
+    {name:'📈 Dealer Payment Report', path:'/dealer-payment-report', id:'4'},
   ]
 
 
