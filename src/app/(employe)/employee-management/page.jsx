@@ -10,7 +10,7 @@ function EmployeManagement() {
         { name: '📝 Add Employee', path: '/add-employee', id: '1' },
         { name: '📄 View Employee', path: '/view-employee', id: '2' },
         { name: '📈 Expenses Employee', path: '/employee-expense', id: '3' },
-        { name: '📆 Employee Expenses History', path: '/', id: '4' },
+        { name: '📆 Employee Expenses History', path: '/view-employee-expense', id: '4' },
     ]
 
     return (

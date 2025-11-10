@@ -54,7 +54,7 @@ function AddExpenses() {
                     </fieldset>
 
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend text-lg font-thin">Expense Category</legend>
+                        <legend className="fieldset-legend text-lg font-thin">Approved By</legend>
                         <select defaultValue="" name='employee' className="select w-full">
                             <option >--SELECT--</option>
                             <option>Oveek</option>
