@@ -3,7 +3,11 @@ import React from 'react'
 import { FaPencilAlt, FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 
-function PaymentReport() {
+function PaymentReport({ dealerPayments }) {
+
+
+
+
     return (
         <div>
             <div className='my-6'>
@@ -22,25 +26,30 @@ function PaymentReport() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Rakib</td>
-                                <td>837</td>
-                                <td>Online Bank Trancfer</td>
-                                <td>50000</td>
-                                <td>
-                                    <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
-                                    </button>
+                            {
+                                dealerPayments.map(dealerPayment => {
+                                    return <tr>
+                                        <th key={dealerPayment?.id}>{dealerPayment?.id}</th>
+                                        <td>{dealerPayment?.dealer?.name}</td>
+                                        <td>{dealerPayment?.ref_memo}</td>
+                                        <td>{dealerPayment?.payment_method}</td>
+                                        <td>{dealerPayment?.amount}</td>
+                                        <td>
+                                            <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            </button>
 
-                                    <button className="badge badge-soft text-red-400 mr-2">
-                                        <span><ImBin></ImBin></span>
-                                    </button>
-                                    <DeleteAlart status='dealer'></DeleteAlart>
+                                            <button className="badge badge-soft text-red-400 mr-2">
+                                                <span><ImBin></ImBin></span>
+                                            </button>
+                                            <DeleteAlart status='dealer'></DeleteAlart>
 
-                                    <button className="badge badge-soft badge-primary mr-2">
-                                        <span> <FaPencilAlt></FaPencilAlt> </span></button>
-                                </td>
-                            </tr>
+                                            <button className="badge badge-soft badge-primary mr-2">
+                                                <span> <FaPencilAlt></FaPencilAlt> </span></button>
+                                        </td>
+                                    </tr>
+                                })
+                            }
+
                         </tbody>
                     </table>
                 </div>

@@ -2,11 +2,13 @@ import PaymentReport from '@/components/dealerComponents/PaymentReport/PaymentRe
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 
-function DealerPaymentReport() {
+async function DealerPaymentReport() {
+  const data = await fetch('http://127.0.0.1:8000/dealer-payment/')
+  const dealerPayments = await data.json()
   return (
     <div>
         <PageTitle></PageTitle>
-        <PaymentReport></PaymentReport>
+        <PaymentReport dealerPayments = {dealerPayments}></PaymentReport>
     </div>
   )
 }
