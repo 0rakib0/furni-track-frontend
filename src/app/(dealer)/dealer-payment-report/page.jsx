@@ -8,7 +8,7 @@ async function DealerPaymentReport() {
   return (
     <div>
         <PageTitle></PageTitle>
-        <PaymentReport dealerPayments = {dealerPayments}></PaymentReport>
+        <PaymentReport dealerPaymentss = {dealerPayments}></PaymentReport>
     </div>
   )
 }
