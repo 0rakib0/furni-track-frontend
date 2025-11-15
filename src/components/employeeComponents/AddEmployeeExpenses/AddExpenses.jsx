@@ -21,7 +21,7 @@ function AddExpenses() {
 
         const expenseFormData = new FormData();
 
-        expenseFormData.append('employee', employee);
+        expenseFormData.append('employee_id', employee);
         expenseFormData.append('expense_title', expens_title);
         expenseFormData.append('expenses_category', expense_category);
         expenseFormData.append('amount', expense_amount);

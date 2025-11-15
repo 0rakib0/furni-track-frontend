@@ -18,7 +18,7 @@ function AddDealerPayment() {
     const amount = form.amount.value;
 
     const dealerPaymentFormData = new FormData()
-    dealerPaymentFormData.append('dealer', dealer)
+    dealerPaymentFormData.append('dealer_id', dealer)
     dealerPaymentFormData.append('ref_memo', ref_memo)
     dealerPaymentFormData.append('payment_method', payment_method)
     dealerPaymentFormData.append('amount', amount)
