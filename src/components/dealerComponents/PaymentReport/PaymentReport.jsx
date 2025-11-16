@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import SingleDealerPaymentView from '../SingleDealerPaymentView/SingleDealerPaymentView'
 
 function PaymentReport({ dealerPaymentss }) {
 
@@ -11,7 +12,13 @@ function PaymentReport({ dealerPaymentss }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [delerPayments, setDelaerPayments] = useState(dealerPaymentss)
 
-    console.log(dealerPaymentss)
+   
+    const handleView = (selectDealerPayment) => {
+        setSelectDealerPayment(selectDealerPayment)
+        document.getElementById("dealer_payment_view").showModal();
+    }
+
+
     const handleDeleteClick = (dealer) => {
         setSelectDealerPayment(dealer);
         setIsModalOpen(true);
@@ -70,7 +77,7 @@ function PaymentReport({ dealerPaymentss }) {
                                         <td>{dealerPayment?.payment_method}</td>
                                         <td>{dealerPayment?.amount}</td>
                                         <td>
-                                            <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            <button onClick={() => { handleView(dealerPayment) }} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
 
                                             <button onClick={() => { handleDeleteClick(dealerPayment) }} className="badge badge-soft text-red-400 mr-2">
@@ -86,6 +93,7 @@ function PaymentReport({ dealerPaymentss }) {
                     </table>
                 </div>
             </div>
+            <SingleDealerPaymentView paymentData={selectDealerPayment}></SingleDealerPaymentView>
             <DeleteAlart
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
