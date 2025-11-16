@@ -4,16 +4,24 @@ import React, { useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 import { toast } from 'react-toastify'
+import SingleExpenseView from '../SingleExpenseView/SingleExpenseView'
 
 function ExpenseReport({ expenseData }) {
     const [expensesData, setExpensesData] = useState(expenseData)
     const [selectExpense, setSelectExpense] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+
     const handleDeleteClick = (expence) => {
         setSelectExpense(expence);
         setIsModalOpen(true);
     }
+
+    const handleView = (expence) => {
+        setSelectExpense(expence)
+        document.getElementById("view_single_expense").showModal();
+    }
+
 
 
     const handleConfirmDelete = () => {
@@ -61,7 +69,7 @@ function ExpenseReport({ expenseData }) {
                         <tbody>
                             {
                                 expensesData?.map((expense, index) => (
-                                    <tr key={expense.id}>
+                                    <tr key={expense?.id}>
                                         <th>{index + 1}</th>
                                         <td>{expense?.employee?.name}</td>
                                         <td>{expense?.expense_title}</td>
@@ -69,7 +77,7 @@ function ExpenseReport({ expenseData }) {
                                         <td>{expense?.amount}</td>
                                         <td>{expense?.approved_by}</td>
                                         <td>
-                                            <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            <button onClick={() => handleView(expense)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
 
                                             <button onClick={() => handleDeleteClick(expense)} className="badge badge-soft text-red-400 mr-2">
@@ -84,6 +92,7 @@ function ExpenseReport({ expenseData }) {
                     </table>
                 </div>
             </div>
+            <SingleExpenseView singleExpenceData={selectExpense}></SingleExpenseView>
             <DeleteAlart
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
