@@ -3,9 +3,41 @@ import DeleteAlart from '@/components/deleteConfirmationAlert/DeleteAlart'
 import React, { useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
+import { toast } from 'react-toastify'
 
 function ExpenseReport({ expenseData }) {
     const [expensesData, setExpensesData] = useState(expenseData)
+    const [selectExpense, setSelectExpense] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const handleDeleteClick = (expence) => {
+        setSelectExpense(expence);
+        setIsModalOpen(true);
+    }
+
+
+    const handleConfirmDelete = () => {
+
+        if (selectExpense) {
+            fetch(`http://127.0.0.1:8000/employee-expense/${selectExpense.id}/`, {
+                method: 'DELETE',
+            })
+
+                .then(res => res)
+                .then(() => {
+                    toast.success("Employee expense Data deleted successfully")
+                    const afterDeleteExpenseData = expensesData.filter(expense => expense.id !== selectExpense.id)
+                    setExpensesData(afterDeleteExpenseData)
+                })
+
+                .catch(error => {
+                    toast.error(error.message);
+                })
+        }
+        setIsModalOpen(false);
+
+    }
+
 
     return (
 
@@ -40,7 +72,7 @@ function ExpenseReport({ expenseData }) {
                                             <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                                             </button>
 
-                                            <button className="badge badge-soft text-red-400 mr-2">
+                                            <button onClick={() => handleDeleteClick(expense)} className="badge badge-soft text-red-400 mr-2">
                                                 <span><ImBin></ImBin></span>
                                             </button>
                                             <DeleteAlart status='dealer'></DeleteAlart>
@@ -52,6 +84,11 @@ function ExpenseReport({ expenseData }) {
                     </table>
                 </div>
             </div>
+            <DeleteAlart
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleConfirmDelete}
+            />
         </div>
     )
 }
