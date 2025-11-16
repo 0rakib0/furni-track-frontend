@@ -2,11 +2,14 @@ import ExpenseReport from '@/components/employeeComponents/ExpenseReport/Expense
 import PageTitle from '@/components/PageTitle/PageTitle'
 import React from 'react'
 
-function ViewEmployeeExpenses() {
+async function ViewEmployeeExpenses() {
+  const response = await fetch('http://127.0.0.1:8000/employee-expense/')
+  const expenseData = await response.json()
+
   return (
     <div>
         <PageTitle></PageTitle>
-        <ExpenseReport></ExpenseReport>
+        <ExpenseReport expenseData={expenseData}></ExpenseReport>
     </div>
   )
 }

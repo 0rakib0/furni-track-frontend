@@ -1,9 +1,12 @@
+"use client"
 import DeleteAlart from '@/components/deleteConfirmationAlert/DeleteAlart'
-import React from 'react'
-import { FaPencilAlt, FaRegEye } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 
-function ExpenseReport() {
+function ExpenseReport({ expenseData }) {
+    const [expensesData, setExpensesData] = useState(expenseData)
+
     return (
 
         <div>
@@ -16,6 +19,7 @@ function ExpenseReport() {
                             <tr>
                                 <th>#</th>
                                 <th>Employee</th>
+                                <th>Title</th>
                                 <th>Category</th>
                                 <th>Expense Amount</th>
                                 <th>Aprove</th>
@@ -23,22 +27,27 @@ function ExpenseReport() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Rakib</td>
-                                <td>Salary</td>
-                                <td>40000</td>
-                                <td>Oveek</td>
-                                <td>
-                                    <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
-                                    </button>
+                            {
+                                expensesData?.map((expense, index) => (
+                                    <tr key={expense.id}>
+                                        <th>{index + 1}</th>
+                                        <td>{expense?.employee?.name}</td>
+                                        <td>{expense?.expense_title}</td>
+                                        <td>{expense?.expenses_category}</td>
+                                        <td>{expense?.amount}</td>
+                                        <td>{expense?.approved_by}</td>
+                                        <td>
+                                            <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                                            </button>
 
-                                    <button className="badge badge-soft text-red-400 mr-2">
-                                        <span><ImBin></ImBin></span>
-                                    </button>
-                                    <DeleteAlart status='dealer'></DeleteAlart>
-                                </td>
-                            </tr>
+                                            <button className="badge badge-soft text-red-400 mr-2">
+                                                <span><ImBin></ImBin></span>
+                                            </button>
+                                            <DeleteAlart status='dealer'></DeleteAlart>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>
