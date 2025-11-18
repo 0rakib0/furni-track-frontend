@@ -10,6 +10,9 @@ function CustomarManagement() {
         { name: '📄 View Customar', path: '/view-customar', id: '2' },
         { name: '🔍 Send Offer Mails', path: '/send-offer-mail', id: '3' },
         { name: '📆 Late Delivery Customar', path: '/late-delivery-customar-list', id: '4' },
+        { name: '➕ Add Customar complain', path: '/add-complain', id: '5' },
+        { name: '📄 Customar Complain List', path: '/late-delivery-customar-list', id: '6' },
+        { name: '📄 After 3 days service Date', path: '/late-delivery-customar-list', id: '7' },
     ]
 
     return (
