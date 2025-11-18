@@ -3,9 +3,29 @@ import React, { useState } from 'react'
 
 function AddCustomarComplain() {
   const [loading, setLoading] = useState(false)
+
+  const handleFormSubmit = (event) =>{
+    event.preventDefault()
+    const form = event.target;
+    const name = form.name.value;
+    const title = form.name.title;
+    const memo = form.memo.value;
+    const phone = form.phone.value;
+    const address = form.address.value;
+    const problem_details = form.problem_details.value;
+    const service_date = form.service_date.value;
+    const issue_image = form.issue_image.files[0];
+
+    console.log(name, title, memo, phone, address, problem_details, service_date, issue_image)
+
+
+  }
+
+
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className='bg-white p-4 md:w-3/4 md:m-auto rounded-lg shadow-lg'>
           <h3 className='text-2xl text-center '>➕Add Customar Complain</h3>
           <fieldset className="fieldset">
@@ -29,7 +49,7 @@ function AddCustomarComplain() {
             <input type="text" name='address' className="input w-full focus:outline-none" placeholder="Customar Address" />
           </fieldset>
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Problem Details</legend>
+            <legend className="fieldset-legend text-lg font-thin">Problem Details</legend>
             <textarea className="textarea h-24 w-full focus:outline-none" name='problem_details' placeholder="Enter Problem Details Here"></textarea>
           </fieldset>
           <fieldset className="fieldset">
