@@ -1,10 +1,32 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 
 function ViewCustomarComplain() {
   const [loading, setLoading] = useState(false)
+  const [complainData, setComplainData] = useState([])
+  const [filter, setFilter] = useState('all-data')
+
+
+  const handleChange = (event) =>{
+    const selected = event.target.value;
+    setFilter(selected)
+  }
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`http://127.0.0.1:8000/customar-complain/?filter=${filter}`)
+      .then(res => res.json())
+      .then(data => {
+        setComplainData(data)
+        setLoading(false)
+      })
+  }, [filter])
+
+
+
+
   return (
     <div>
       <div className='my-6'>
@@ -12,10 +34,15 @@ function ViewCustomarComplain() {
         <div className='flex justify-between mb-2'>
           <h3 className='md:text-2xl text-xl mb-2 text-[#57c7d4]'>🧾Customar List</h3>
           <form>
-            <select defaultValue="Pick a color" className="select focus:outline-none">
-              <option>All Complain Data</option>
-              <option>Pending Complain Data</option>
-              <option>Complate Complain Data</option>
+            <select
+            defaultValue="Pick a color"
+            className="select focus:outline-none"
+            onChange={handleChange}
+            >
+
+              <option value="all-data">All Complain Data</option>
+              <option value="pending-data">Pending Complain Data</option>
+              <option value="complate-data">Complate Complain Data</option>
             </select>
           </form>
         </div>
@@ -34,59 +61,29 @@ function ViewCustomarComplain() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>3</th>
-                <td>Rakib</td>
-                <td>2020</td>
-                <td>Mohakhali, Dhaka</td>
-                <td>24-11-2025</td>
-                <td>
-                  <span className="badge badge-soft bg-green-500 text-white">Complate</span>
-                </td>
-                {/* <td>
-                  {customar.address?.length > 20
-                    ? customar.address.slice(0, 20) + "..."
-                    : customar.address}
-                    Dhaka, Mohakhali-1212
-                </td> */}
-                <td>
-                  <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
-                  </button>
+              {
+                complainData?.map((complain, index) => (
+                   <tr key={complain?.id}>
+                    <th>{index}</th>
+                    <td>{complain?.customar_name}</td>
+                    <td>{complain?.memo}</td>
+                    <td>{complain?.address}</td>
+                    <td>{complain?.service_date}</td>
+                    <td>
+                      <span className={`badge badge-soft ${complain?.status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{complain?.status ? "Delivered" : "Pending"}</span>
+                    </td>
+                    <td>
+                      <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                      </button>
 
-                  <button className="badge badge-soft text-red-400 mr-2">
-                    <span><ImBin></ImBin></span>
-                  </button>
-                  {/* <DeleteAlart id={cuastomar.id} status='cuastomarr'></DeleteAlart> */}
-                </td>
-              </tr>
-
-              <tr>
-                <th>4</th>
-                <td>Rakib</td>
-                <td>2020</td>
-                <td>Mohakhali, Dhaka</td>
-                <td>24-11-2025</td>
-                <td>
-                  <span className="badge badge-soft bg-red-500 text-white">Pending</span>
-                </td>
-                {/* <td>
-                  {customar.address?.length > 20
-                    ? customar.address.slice(0, 20) + "..."
-                    : customar.address}
-                    Dhaka, Mohakhali-1212
-                </td> */}
-                <td>
-                  <button className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
-                  </button>
-
-                  <button className="badge badge-soft text-red-400 mr-2">
-                    <span><ImBin></ImBin></span>
-                  </button>
-                  {/* <DeleteAlart id={cuastomar.id} status='cuastomarr'></DeleteAlart> */}
-                </td>
-              </tr>
-
-
+                      <button className="badge badge-soft text-red-400 mr-2">
+                        <span><ImBin></ImBin></span>
+                      </button>
+                      {/* <DeleteAlart id={cuastomar.id} status='cuastomarr'></DeleteAlart> */}
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
