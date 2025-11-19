@@ -1,14 +1,15 @@
 "use client"
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 function AddCustomarComplain() {
   const [loading, setLoading] = useState(false)
 
-  const handleFormSubmit = (event) =>{
+  const handleFormSubmit = (event) => {
     event.preventDefault()
     const form = event.target;
     const name = form.name.value;
-    const title = form.name.title;
+    const title = form.title.value;
     const memo = form.memo.value;
     const phone = form.phone.value;
     const address = form.address.value;
@@ -16,9 +17,33 @@ function AddCustomarComplain() {
     const service_date = form.service_date.value;
     const issue_image = form.issue_image.files[0];
 
-    console.log(name, title, memo, phone, address, problem_details, service_date, issue_image)
+    const complainData = new FormData()
+    complainData.append('customar_name', name);
+    complainData.append('title', title);
+    complainData.append('memo', memo);
+    complainData.append('phone', phone);
+    complainData.append('address', address);
+    complainData.append('problem_details', problem_details)
+    complainData.append('service_date', service_date)
+    complainData.append('problem_pic', issue_image)
 
 
+    fetch('http://127.0.0.1:8000/customar-complain/', {
+      method: 'POST',
+      body: complainData
+    })
+
+      .then(res => res.json())
+      .then(data => {
+        toast.success("Complain Data Successfully added");
+        setLoading(false)
+        form.reset();
+      })
+
+      .catch(error => {
+        toast.error(error);
+        setLoading(false)
+      })
   }
 
 
