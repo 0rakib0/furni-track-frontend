@@ -3,7 +3,7 @@ import React from 'react'
 
 function SingleDealerView({ dealer }) {
 
-    console.log(dealer)
+    
     return (
         <>
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

@@ -3,18 +3,48 @@ import React, { useEffect, useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import { ImBin } from 'react-icons/im'
 import ViewSingleComplain from './ViewSingleComplain'
+import DeleteAlart from '../deleteConfirmationAlert/DeleteAlart'
+import { toast } from 'react-toastify'
 
 function ViewCustomarComplain() {
   const [loading, setLoading] = useState(false)
   const [complainData, setComplainData] = useState([])
   const [selectComplain, setSelectComplain] = useState(null)
   const [filter, setFilter] = useState('all-data')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
 
-  const handleCustomarView = (complain) => {
+  const handleComplainView = (complain) => {
     setSelectComplain(complain)
     document.getElementById('viewsinglecomplain').showModal()
   }
+
+  const handleDeleteClick = (complain) => {
+    setSelectComplain(complain);
+    setIsModalOpen(true);
+  }
+
+  const handleConfirmDelete = () => {
+
+    if (selectComplain) {
+      fetch(`http://127.0.0.1:8000/customar-complain/${selectComplain.id}/`, {
+        method: 'DELETE',
+      })
+
+        .then(res => res)
+        .then(() => {
+          toast.success("Complain Data deleted successfully")
+          const afterDeleteComplain = complainData.filter(complain => complain.id !== selectComplain.id)
+          setComplainData(afterDeleteComplain)
+        })
+
+        .catch(error => {
+          toast.error(error.message);
+        })
+    }
+    setIsModalOpen(false);
+  }
+
 
   const handleChange = (event) => {
     const selected = event.target.value;
@@ -80,10 +110,10 @@ function ViewCustomarComplain() {
                       <span className={`badge badge-soft ${complain?.status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{complain?.status ? "Delivered" : "Pending"}</span>
                     </td>
                     <td>
-                      <button onClick={()=> handleCustomarView(complain)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
+                      <button onClick={() => handleComplainView(complain)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
                       </button>
 
-                      <button className="badge badge-soft text-red-400 mr-2">
+                      <button onClick={() => handleDeleteClick(complain)} className="badge badge-soft text-red-400 mr-2">
                         <span><ImBin></ImBin></span>
                       </button>
                       {/* <DeleteAlart id={cuastomar.id} status='cuastomarr'></DeleteAlart> */}
@@ -96,12 +126,12 @@ function ViewCustomarComplain() {
         </div>
       </div>
       <ViewSingleComplain complain={selectComplain}></ViewSingleComplain>
-      {/* <ViewCustomar customar={selectCustomar}></ViewCustomar>
       <DeleteAlart
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirmDelete}
-      /> */}
+      />
+
     </div>
   )
 }

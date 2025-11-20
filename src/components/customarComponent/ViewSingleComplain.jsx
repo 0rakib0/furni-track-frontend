@@ -1,6 +1,30 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 function ViewSingleComplain({ complain }) {
+
+
+    const handleMarkComplete = async () => {
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/customar-complain/${complain.id}/`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: true })
+            });
+
+            if (res.ok) {
+                toast.success("Complain marked as completed!");
+                document.getElementById('viewsinglecomplain').close()
+            } else {
+                toast.error("Failed to update complain!");
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
     return (
         <>
             <dialog id="viewsinglecomplain" className="modal modal-bottom sm:modal-middle">
@@ -21,9 +45,17 @@ function ViewSingleComplain({ complain }) {
                                 />
                             </div>
 
+                            {!complain.status && (
+                                <button
+                                    onClick={() => handleMarkComplete(complain.id)}
+                                    className="px-4 py-2 text-white bg-[#57c7d4] hover:bg-[#42b3c0] rounded-lg shadow-md transition"
+                                >
+                                    Mark to Complete
+                                </button>
+                            )}
+
                             {/* Complain Details */}
                             <div className="space-y-2 text-gray-700 text-[17px]">
-                                <p><strong className="text-[#57c7d4]">Name:</strong> {complain.problem_pic}</p>
                                 <p><strong className="text-[#57c7d4]">Name:</strong> {complain.customar_name}</p>
                                 <p><strong className="text-[#57c7d4]">Phone:</strong> {complain.phone}</p>
                                 <p><strong className="text-[#57c7d4]">Address:</strong> {complain.address}</p>
