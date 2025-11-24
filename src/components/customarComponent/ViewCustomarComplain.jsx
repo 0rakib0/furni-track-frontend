@@ -107,7 +107,7 @@ function ViewCustomarComplain() {
                     <td>{complain?.address}</td>
                     <td>{new Date(complain?.service_date).toLocaleDateString()}</td>
                     <td>
-                      <span className={`badge badge-soft ${complain?.status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{complain?.status ? "Delivered" : "Pending"}</span>
+                      <span className={`badge badge-soft ${complain?.status ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>{complain?.status ? "Complate" : "Pending"}</span>
                     </td>
                     <td>
                       <button onClick={() => handleComplainView(complain)} className="badge badge-soft badge-info mr-2"><span className='text-xl'><FaRegEye /></span>
