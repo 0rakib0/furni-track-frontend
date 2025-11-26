@@ -1,8 +1,10 @@
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
+import CustomarData from '../CustomarData'
+import CustomarTable from '@/components/customarComponent/CustomarTable'
 
-function CustomarManagement() {
+async function CustomarManagement() {
 
 
     const customarRout = [
@@ -14,6 +16,8 @@ function CustomarManagement() {
         { name: '📄 Customar Complain List', path: '/complain-list', id: '6' },
         { name: '📄 After 3 days service Date', path: '/late-delivery-customar-list', id: '7' },
     ]
+
+    const customars = await CustomarData()
 
     return (
         <div>
@@ -27,7 +31,7 @@ function CustomarManagement() {
 
             {/* Pending Orders */}
 
-            {/* <OrdersTable title="🧾All Dealers"></OrdersTable> */}
+            <CustomarTable customars={customars}></CustomarTable>
         </div>
     )
 }
