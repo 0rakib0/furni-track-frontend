@@ -81,8 +81,8 @@ function EmployeeTable({ employees }) {
                         <tbody>
 
                             {
-                                employes.map(employee => <tr key={employee.id}>
-                                    <th>{employee.id}</th>
+                                employes.map((employee, index) => <tr key={employee.id}>
+                                    <th>{index + 1}</th>
                                     <td>{employee.id}</td>
                                     <td>{employee.name}</td>
                                     <td>{employee.phone}</td>

@@ -3,8 +3,9 @@ import OrdersTable from '@/components/orderComponents/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
+import EmployeeData from '../EmployeeData'
 
-function EmployeManagement() {
+async function EmployeManagement() {
 
     const employeeRout = [
         { name: '📝 Add Employee', path: '/add-employee', id: '1' },
@@ -12,6 +13,9 @@ function EmployeManagement() {
         { name: '📈 Expenses Employee', path: '/employee-expense', id: '3' },
         { name: '📆 Employee Expenses History', path: '/view-employee-expense', id: '4' },
     ]
+
+
+    const employees = await EmployeeData()
 
     return (
         <div>
@@ -25,7 +29,7 @@ function EmployeManagement() {
 
         {/* Pending Orders */}
 
-        {/* <EmployeeTable title="🧾All Employee"></EmployeeTable> */}
+        <EmployeeTable employees={employees}></EmployeeTable>
     </div>
     )
 }
