@@ -52,7 +52,6 @@ function UpdateDealer({ dealer }) {
 
     return (
         <div>
-            <button className="btn" onClick={() => document.getElementById('update_dealer').showModal()}>open modal</button>
             <dialog id="update_dealer" className="modal">
                 <div className="modal-box">
                     <form method="dialog">

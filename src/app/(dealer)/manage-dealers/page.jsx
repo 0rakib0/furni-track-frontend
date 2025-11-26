@@ -2,9 +2,12 @@ import OrdersTable from '@/components/orderComponents/OrdersTable'
 import PageTitle from '@/components/PageTitle/PageTitle'
 import RoutCard from '@/components/RoutCard/RoutCard'
 import React from 'react'
+import DealerData from '../DealerData'
+import DealerTable from '@/components/dealerComponents/dealerTable/DealerTable'
 
-function ManageDealer() {
+async function ManageDealer() {
 
+    const dealers = await DealerData()
 
     const dealerRout = [
     {name:'📝 Add Dealer', path:'/add-dealer', id:'1'},
@@ -26,7 +29,7 @@ function ManageDealer() {
 
         {/* Pending Orders */}
 
-        <OrdersTable title="🧾All Dealers"></OrdersTable>
+        <DealerTable dealers={dealers}></DealerTable>
     </div>
   )
 }

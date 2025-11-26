@@ -81,9 +81,9 @@ function DealerTable({ dealers }) {
                         <tbody>
                             {/* row 1 */}
                             {
-                                delers.map(deale => {
+                                delers.map((deale, index) => {
                                     return <tr key={deale.id}>
-                                        <th>1</th>
+                                        <th>{index + 1}</th>
                                         <td>{deale.id}</td>
                                         <td>{deale.name}</td>
                                         <td>{deale.phone}</td>
